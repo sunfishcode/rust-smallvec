@@ -21,6 +21,12 @@ may_dangle = []
 drain_filter = []
 drain_keep_rest = ["drain_filter"]
 
+rustc-dep-of-std = [
+    "dep:core",
+    "dep:alloc",
+    "compiler_builtins",
+]
+
 # UNSTABLE FEATURES (requires Rust nightly)
 # Enable to use the #[debugger_visualizer] attribute.
 debugger_visualizer = []
@@ -28,6 +34,11 @@ debugger_visualizer = []
 [dependencies]
 serde = { version = "1", optional = true, default-features = false }
 arbitrary = { version = "1", optional = true }
+
+# Special dependencies used in rustc-dep-of-std mode.
+core = { version = "1.0.0", optional = true, package = "rustc-std-workspace-core" }
+alloc = { version = "1.0.0", optional = true, package = "rustc-std-workspace-alloc" }
+compiler_builtins = { version = "0.1.101", optional = true }
 
 [dev_dependencies]
 bincode = "1.0.1"
